@@ -136,7 +136,7 @@ const Navbar = () => {
         </div>
         <NavLink to="/" className="text-xl text-blue-600 flex items-center" onClick={() => handleNavLinkClick('Home')}>
           <img
-            src="https://i.postimg.cc/6qK6GcjC/b6028b7bb5448840e9c9b2a39d7992c3-removebg-preview.png"
+            src="https://i.postimg.cc/s22SY2Q6/65993fe8c3a5eb601d84eb69f8c7557e.jpg"
             alt="logo-icon"
             className="h-12 w-12 rounded-full"
           />

@@ -19,11 +19,11 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <NavLink to="/" className="flex items-center mb-4">
               <img
-                src="https://i.postimg.cc/6qK6GcjC/b6028b7bb5448840e9c9b2a39d7992c3-removebg-preview.png"
+                src="https://i.postimg.cc/DZF9jthM/65993fe8c3a5eb601d84eb69f8c7557e-removebg-preview.png"
                 alt="HobbyHub Logo"
                 className="h-14 w-14"
               />
-              <span className="text-2xl font-bold text-white">HobbyHub</span>
+              <span className="text-2xl ml-2 font-bold text-white">HobbyHub</span>
             </NavLink>
             <p className="text-gray-400 text-sm max-w-xs">
               Connect, explore, and grow your passions with HobbyHub – where communities thrive through shared interests.
