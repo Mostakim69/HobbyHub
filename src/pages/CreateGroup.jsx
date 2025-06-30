@@ -45,12 +45,26 @@ const CreateGroup = () => {
       !formData.startDate ||
       !formData.imageUrl
     ) {
-      Swal.fire('Error', 'Please fill in all required fields!', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please fill in all required fields!',
+        background: '#2d2d2d',
+        color: '#ffffff',
+        confirmButtonColor: '#3b82f6',
+      });
       return;
     }
 
     if (isNaN(formData.maxMembers) || formData.maxMembers <= 0) {
-      Swal.fire('Error', 'Max Members must be a positive number!', 'error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Max Members must be a positive number!',
+        background: '#2d2d2d',
+        color: '#ffffff',
+        confirmButtonColor: '#3b82f6',
+      });
       return;
     }
 
@@ -65,7 +79,14 @@ const CreateGroup = () => {
     try {
       const response = await axios.post('https://assignment-ten-server-olive.vercel.app/groups', groupData);
       if (response.data.success) {
-        Swal.fire('Success', 'Group created successfully!', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Group created successfully!',
+          background: '#2d2d2d',
+          color: '#ffffff',
+          confirmButtonColor: '#3b82f6',
+        });
         setFormData({
           groupName: '',
           hobbyCategory: '',
@@ -77,20 +98,34 @@ const CreateGroup = () => {
         });
         navigate('/auth/my-group');
       } else {
-        Swal.fire('Error', response.data.message || 'Failed to create group', 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: response.data.message || 'Failed to create group',
+          background: '#2d2d2d',
+          color: '#ffffff',
+          confirmButtonColor: '#3b82f6',
+        });
       }
     } catch (error) {
       console.error('Error creating group:', error);
-      Swal.fire(
-        'Error',
-        error.response?.data?.message || 'Failed to create group. Please try again.',
-        'error'
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.message || 'Failed to create group. Please try again.',
+        background: '#2d2d2d',
+        color: '#ffffff',
+        confirmButtonColor: '#3b82f6',
+      });
     }
   };
 
   if (loading) {
-    return <div className="loading loading-spinner text-primary"></div>;
+    return (
+      <div className="flex justify-center items-center h-screen bg-[#1a1a1a]">
+        <div className="loading loading-spinner text-blue-500 w-12 h-12"></div>
+      </div>
+    );
   }
 
   if (!user) {
@@ -98,199 +133,174 @@ const CreateGroup = () => {
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 md:px-8 lg:px-12">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
-        Create a New Group
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-4xl mx-auto bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 shadow-lg rounded-lg p-8"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="groupName"
-            >
-              Group Name
-            </label>
-            <input
-              type="text"
-              id="groupName"
-              name="groupName"
-              value={formData.groupName}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              placeholder="Enter group name"
-              required
-            />
-          </div>
+    <div className="min-h-screen bg-[#1a1a1a] py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold text-center text-white mb-8">
+          Create a New Group
+        </h1>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-gradient-to-br from-[#2d2d2d] to-[#3a3a3a] shadow-2xl rounded-lg p-8 space-y-6"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="groupName" className="block text-sm font-medium text-gray-200">
+                Group Name
+              </label>
+              <input
+                type="text"
+                id="groupName"
+                name="groupName"
+                value={formData.groupName}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter group name"
+                required
+              />
+            </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="hobbyCategory"
-            >
-              Hobby Category
-            </label>
-            <select
-              id="hobbyCategory"
-              name="hobbyCategory"
-              value={formData.hobbyCategory}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              required
-            >
-              <option value="" disabled>
-                Select a category
-              </option>
-              {hobbyCategories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
+            <div>
+              <label htmlFor="hobbyCategory" className="block text-sm font-medium text-gray-200">
+                Hobby Category
+              </label>
+              <select
+                id="hobbyCategory"
+                name="hobbyCategory"
+                value={formData.hobbyCategory}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="" disabled>
+                  Select a category
                 </option>
-              ))}
-            </select>
+                {hobbyCategories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="meetingLocation" className="block text-sm font-medium text-gray-200">
+                Meeting Location
+              </label>
+              <input
+                type="text"
+                id="meetingLocation"
+                name="meetingLocation"
+                value={formData.meetingLocation}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter meeting location"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="maxMembers" className="block text-sm font-medium text-gray-200">
+                Max Members
+              </label>
+              <input
+                type="number"
+                id="maxMembers"
+                name="maxMembers"
+                value={formData.maxMembers}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter maximum number of members"
+                min="1"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="startDate" className="block text-sm font-medium text-gray-200">
+                Start Date
+              </label>
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-200">
+                Image URL
+              </label>
+              <input
+                type="url"
+                id="imageUrl"
+                name="imageUrl"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter image URL"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="userName" className="block text-sm font-medium text-gray-200">
+                User Name
+              </label>
+              <input
+                type="text"
+                id="userName"
+                name="userName"
+                value={user?.displayName || 'Anonymous'}
+                className="mt-1 w-full p-3 bg-[#4b4b4b] text-gray-300 border border-[#4b4b4b] rounded-md cursor-not-allowed"
+                readOnly
+              />
+            </div>
+
+            <div>
+              <label htmlFor="userEmail" className="block text-sm font-medium text-gray-200">
+                User Email
+              </label>
+              <input
+                type="email"
+                id="userEmail"
+                name="userEmail"
+                value={user?.email || 'N/A'}
+                className="mt-1 w-full p-3 bg-[#4b4b4b] text-gray-300 border border-[#4b4b4b] rounded-md cursor-not-allowed"
+                readOnly
+              />
+            </div>
           </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="meetingLocation"
-            >
-              Meeting Location
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-200">
+              Description
             </label>
-            <input
-              type="text"
-              id="meetingLocation"
-              name="meetingLocation"
-              value={formData.meetingLocation}
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
               onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              placeholder="Enter meeting location"
+              className="mt-1 w-full p-3 bg-[#333333] text-white border border-[#4b4b4b] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Describe your group"
+              rows="5"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="maxMembers"
+          <div className="text-center">
+            <button
+              type="submit"
+              className="w-full md:w-1/2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold rounded-md hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
             >
-              Max Members
-            </label>
-            <input
-              type="number"
-              id="maxMembers"
-              name="maxMembers"
-              value={formData.maxMembers}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              placeholder="Enter maximum number of members"
-              min="1"
-              required
-            />
+              Create Group
+            </button>
           </div>
-
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="startDate"
-            >
-              Start Date
-            </label>
-            <input
-              type="date"
-              id="startDate"
-              name="startDate"
-              value={formData.startDate}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="imageUrl"
-            >
-              Image URL
-            </label>
-            <input
-              type="url"
-              id="imageUrl"
-              name="imageUrl"
-              value={formData.imageUrl}
-              onChange={handleChange}
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-              placeholder="Enter image URL"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="userName"
-            >
-              User Name
-            </label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              value={user?.displayName || 'Anonymous'}
-              className="w-full p-3 border rounded-md bg-gray-100 cursor-not-allowed text-gray-600"
-              readOnly
-            />
-          </div>
-
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="userEmail"
-            >
-              User Email
-            </label>
-            <input
-              type="email"
-              id="userEmail"
-              name="userEmail"
-              value={user?.email || 'N/A'}
-              className="w-full p-3 border rounded-md bg-gray-100 cursor-not-allowed text-gray-600"
-              readOnly
-            />
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 font-medium mb-2"
-            htmlFor="description"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-            placeholder="Describe your group"
-            rows="5"
-            required
-          ></textarea>
-        </div>
-
-        <div className="text-center">
-          <button
-            type="submit"
-            className="btn btn-primary w-full md:w-1/2 px-6 py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors duration-300"
-          >
-            Create
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
