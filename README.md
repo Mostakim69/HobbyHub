@@ -1,7 +1,6 @@
-# 🍽️ FlavorBook - Recipe & Chef Marketplace Web App
+# 🍽️ HobbyHub  Web App
 
-Welcome to **FlavorBook**, a full-featured and beautifully crafted web application designed to connect food lovers with chefs, ingredients, and delicious recipes. This platform allows users to browse, create, and manage recipes, explore blogs, book chefs, and even shop for ingredients—all in one place.
-
+Welcome to **HobbyHub**,HobbyHub is a community-driven web platform that allows users to create, join, and manage local hobby-based groups. Whether you're into painting, gaming, hiking, or coding, HobbyHub helps you connect with like-minded individuals in your area.
 ---
 
 ## 📌 Project Overview
@@ -15,10 +14,7 @@ Welcome to **FlavorBook**, a full-featured and beautifully crafted web applicati
 | **Portfolio GitHub**   | [shahjalal-portfolio](https://github.com/mdshahjalal5/shahjalal-portfolio)         |
 | **Portfolio Live**     | [shahjalal-labs.surge.sh](http://shahjalal-labs.surge.sh/)                         |
 | **Created On**         | 20 May 2025, 10:32 AM GMT+6                                                        |
-| **Location**           | Sharifpur, Gazipur, Dhaka, Bangladesh                                              |
-| **LinkedIn**           | [md-sj](https://www.linkedin.com/in/md-sj-825bb4341/)                              |
-| **Facebook**           | [Profile](https://www.facebook.com/profile.php?id=61556383702555)                  |
-| **YouTube**            | [Channel](https://www.youtube.com/@muhommodshahjalal9811)                          |
+| **Location**           | Mohanpur, Rajshahi, Bangladesh                                              |
 
 ## 🌐 Live Site
 
@@ -43,9 +39,7 @@ Here's a high-level overview of the project's file structure:
 │   ├── modules/          # Domain-based modules
 │   │   ├── auth/         # Authentication
 │   │   ├── blogs/        # Blog system
-│   │   ├── chef/         # Chef booking system
-│   │   ├── recipe/       # Recipes
-│   │   └── RecipieMarket # Recipe ingredient marketplace
+│   │
 │   ├── pages/            # Page components
 │   ├── provider/         # Context Providers (Auth)
 │   ├── Routes/           # Routing logic
@@ -77,13 +71,6 @@ Here's a high-level overview of the project's file structure:
 - `/privacy-policy` → `PrivacyPolicy.jsx`
 - `/terms-and-conditions` → `TermsCondintion.jsx`
 
-### 🧑‍🍳 Chef Feature (via `ChefLayout.jsx`)
-
-- `/chefs` → `Chefs.jsx`
-- `/chefs/:id` → `ChefDetails.jsx`
-- `/chefs/:id/book` → `ChefCheckout.jsx`
-- `/create-chef` → `CreateChef.jsx`
-- `/update-chef/:id` → `UpdateChef.jsx`
 
 ### 📚 Blog Feature (via `BlogsLayout.jsx`)
 
@@ -91,18 +78,6 @@ Here's a high-level overview of the project's file structure:
 - `/blogs/:id` → `BlogDetails.jsx`
 - `/create-blog` → `CreateBlog.jsx`
 
-### 🍲 Recipes
-
-- `/add-recipe` → `AddRecipe.jsx`
-- `/my-recipes` → `MyRecipes.jsx`
-- `/recipe/:id` → `RecipeDetails.jsx`
-- `/update-recipe/:id` → `UpdateRecipe.jsx`
-
-### 🛒 Recipe Market (via `RecipeMarketLayout.jsx`)
-
-- `/recipe-market` → `MarketHome.jsx`
-- `/recipe-market/:id` → `IngredientDetails.jsx`
-- `/create-ingredient` → `CreateRecipeIngredient.jsx`
 
 ### 👤 Profile
 
@@ -119,23 +94,6 @@ Here's a high-level overview of the project's file structure:
 - Login, Register, Forgot Password
 - Auth-protected routes
 
-### 🍽️ Recipe System
-
-- Add, update, and delete personal recipes
-- View all recipes with tags, categories, and details
-
-### 🧑‍🍳 Chef Booking
-
-- View all chefs
-- Chef details with biography, rating, and services
-- Book chefs and proceed to checkout
-
-### 🛍️ Ingredient Marketplace
-
-- Browse ingredients listed by sellers
-- View ingredient details
-- Add to cart and complete orders
-- Sellers can list their own ingredients
 
 ### 📝 Blog System
 
@@ -143,12 +101,6 @@ Here's a high-level overview of the project's file structure:
 - Blog details with comments, read time, tags
 - Create and share new blogs
 
-### 🎨 Design & Animation
-
-- TailwindCSS + modern UI components
-- Lottie animations (Lottie JSON files)
-- Smooth transitions and effects
-- Mobile responsive design
 
 ---
 
@@ -197,11 +149,6 @@ Made with ❤️ for food enthusiasts and aspiring chefs.
 > "Food is symbolic of love when words are inadequate." — Alan D. Wolfelt
 
 ----- preivous version ------
-
-# 🍽️ FlavorBook – Recipe Sharing Platform
-
-Welcome to **FlavorBook**, a dynamic recipe-sharing platform designed to connect culinary enthusiasts. Users can explore, share, and manage recipes with ease, all within a secure and responsive web application.
-
 ---
 
 ---
@@ -215,11 +162,6 @@ Welcome to **FlavorBook**, a dynamic recipe-sharing platform designed to connect
 - **Protected Routes**: Restricts access to sensitive pages like profile and recipe details.
 - **Password Reset**: Users can reset passwords through email verification.
 
-### 🧾 Recipe Management
-
-- **All Recipes page**: Display recipes with JSON-based data.
-- **Add/Update/Delete Recipes**: Users can create,modify and delete their own recipes.
-- **Recipe Details**: View comprehensive information about each recipe.
 
 ### 👤 User Profile
 
