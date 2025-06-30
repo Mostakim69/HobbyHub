@@ -4,7 +4,7 @@ import { AuthContext } from '../provider/MyProvider';
 import Swal from 'sweetalert2';
 
 const Sidebar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleAuthClick = (e, route, action) => {
@@ -21,9 +21,18 @@ const Sidebar = () => {
     }
   };
 
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire('Success', 'Logged Out successful!', 'success');
+        navigate('/auth/login');
+      })
+      .catch((error) => Swal.fire('Error', error.message, 'error'));
+  };
+
   const links = [
     { to: '/', text: 'Home' },
-    { to: '/auth/dashboard', text: 'Dashboard' },
+    { to: '/auth/dashboard', text: 'Overview' },
     {
       to: '/auth/create-group',
       text: 'Create Group',
@@ -36,10 +45,12 @@ const Sidebar = () => {
     },
   ];
 
+  if (!user) return null;
+
   return (
-    <div className="fixed top-0 left-0 w-64 bg-teal-800 h-screen text-white p-4 z-40 overflow-y-auto">
+    <div className="fixed top-0 left-0 w-64 bg-teal-800 h-screen text-white p-4 z-40 overflow-y-auto flex flex-col">
       <h1 className="text-2xl mb-6 font-bold">HobbyHub</h1>
-      <ul className="flex flex-col space-y-4">
+      <ul className="flex flex-col space-y-4 flex-grow">
         {links.map(({ to, text, onClick }, i) => (
           <li key={i}>
             <NavLink
@@ -56,6 +67,14 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      {user && (
+        <button
+          onClick={handleLogout}
+          className="btn btn-primary mt-4 w-full text-white bg-teal-600 hover:bg-teal-700 border-none"
+        >
+          Logout
+        </button>
+      )}
     </div>
   );
 };
