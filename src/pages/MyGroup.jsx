@@ -10,7 +10,6 @@ const MyGroup = () => {
   const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch groups for the logged-in user
   useEffect(() => {
     if (user) {
       const fetchGroups = async () => {
@@ -34,7 +33,6 @@ const MyGroup = () => {
     }
   }, [user]);
 
-  // Handle delete group
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: 'Are you sure?',
@@ -62,17 +60,14 @@ const MyGroup = () => {
     }
   };
 
-  // Handle update
   const handleUpdate = (id) => {
     navigate(`/auth/updateGroup/${id}`);
   };
 
-  // Show loading state
   if (loading || isLoading) {
     return <div className="flex justify-center items-center h-screen"><div className="loading loading-spinner text-primary"></div></div>;
   }
 
-  // Ensure user is authenticated
   if (!user) {
     return <Navigate to="/auth/login" replace />;
   }
@@ -82,25 +77,29 @@ const MyGroup = () => {
       <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
         My Groups
       </h1>
-      {groups.length === 0 ? (
-        <p className="text-center">No groups found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="table w-full bg-white shadow-lg rounded-lg min-w-[600px]">
-            <thead>
-              <tr className="bg-gray-200 text-gray-700 text-xs sm:text-sm">
-                <th className="p-2 sm:p-3 text-center">Image</th>
-                <th className="p-2 sm:p-3">Group Name</th>
-                <th className="p-2 sm:p-3 hidden md:table-cell">Hobby Category</th>
-                <th className="p-2 sm:p-3 hidden lg:table-cell">Description</th>
-                <th className="p-2 sm:p-3 hidden md:table-cell">Meeting Location</th>
-                <th className="p-2 sm:p-3 hidden sm:table-cell">Max Members</th>
-                <th className="p-2 sm:p-3 hidden sm:table-cell">Start Date</th>
-                <th className="p-2 sm:p-3">Actions</th>
+      <div className="overflow-x-auto">
+        <table className="table w-full bg-white shadow-lg rounded-lg min-w-[600px]">
+          <thead>
+            <tr className="bg-gray-200 text-gray-700 text-xs sm:text-sm">
+              <th className="p-2 sm:p-3 text-center">Image</th>
+              <th className="p-2 sm:p-3">Group Name</th>
+              <th className="p-2 sm:p-3 hidden md:table-cell">Hobby Category</th>
+              <th className="p-2 sm:p-3 hidden lg:table-cell">Description</th>
+              <th className="p-2 sm:p-3 hidden md:table-cell">Meeting Location</th>
+              <th className="p-2 sm:p-3 hidden sm:table-cell">Max Members</th>
+              <th className="p-2 sm:p-3 hidden sm:table-cell">Start Date</th>
+              <th className="p-2 sm:p-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groups.length === 0 ? (
+              <tr>
+                <td colSpan="8" className="p-4 text-center text-gray-500">
+                  No groups found.
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {groups.map((group) => (
+            ) : (
+              groups.map((group) => (
                 <tr key={group._id} className="border-b hover:bg-gray-50 text-xs sm:text-sm">
                   <td className="p-2 sm:p-3">
                     <img
@@ -135,11 +134,11 @@ const MyGroup = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
